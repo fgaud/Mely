@@ -1,0 +1,19 @@
+Simple web server architecture:
+
+
+Accept(1)                                                                                          Dec_Accepted_Clients(8)
+ \                                                                                                       ^
+  \                     ----> BadRequest (6) --------------------------------------------------          |
+   \                  /                                                                         \        |
+    \         _      /    --------------(Client closed connection)----------------------------   \       |
+     \       | |    /    /                                                                     \  \      |
+      \      v |   /    /                                                                       \  \     |
+       -> ReadRequest (2)                                          -> FreeRequest (5)            ----> Close(7)
+                        \                                         /
+                         \                                       /
+                 	        \	                                  /
+                           \                                   /
+                            -> FILE_HANDLER (3)  ----> Write (4) 
+                                                        | ^
+                                                        |_|
+
